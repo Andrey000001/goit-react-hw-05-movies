@@ -4,11 +4,14 @@ const BASE_URL = 'https://api.themoviedb.org/3/';
 
 const mainRequestMovies = async () => {
   try {
-    const response = await fetch(`${BASE_URL}trending/all/day?language=en-US`, {
-      headers: {
-        Authorization: `Bearer ${API_KEY}`,
-      },
-    });
+    const response = await fetch(
+      `${BASE_URL}trending/movie/day?language=en-US`,
+      {
+        headers: {
+          Authorization: `Bearer ${API_KEY}`,
+        },
+      }
+    );
     if (!response.ok) {
       throw new Error(response.statusText);
     }

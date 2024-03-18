@@ -28,7 +28,6 @@ function Cast() {
     };
     fetchRequest();
   }, [id]);
-
   return (
     <>
       {data.length > 0 && (

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import searchMovies from 'services/serchMovies';
@@ -7,8 +7,8 @@ import { Content, List, Item } from './Movies.styled';
 const Movies = () => {
   const [data, setData] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const movieParams = searchParams.get('quary') ?? '';
-
+  const movieParams = searchParams.get('query') ?? '';
+  const location = useLocation();
   useEffect(() => {
     if (!movieParams) return;
     try {
@@ -28,7 +28,7 @@ const Movies = () => {
     if (valueMovie === '') {
       toast.info('Вы ничего не ввели');
     } else {
-      setSearchParams({ quary: valueMovie });
+      setSearchParams({ query: valueMovie });
     }
   };
   const hanldeChange = e => {
@@ -54,7 +54,7 @@ const Movies = () => {
           {data.length > 0 &&
             data.map(({ title, id }) => (
               <Item>
-                <Link key={id} to={`/movies/${id}`}>
+                <Link key={id} state={{ from: location }} to={`/movies/${id}`}>
                   {title}
                 </Link>
               </Item>

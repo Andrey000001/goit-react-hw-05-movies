@@ -46,12 +46,19 @@ function MovieDetails() {
     };
     fetchMovie();
   }, [id]);
+
   const { poster, title, voteAverage, releaseDate, overview, genres } = data;
   const releaseYear = releaseDate ? releaseDate.slice(0, 4) : '';
 
   const resultAverage = Math.round(voteAverage * 10) + '%';
   const resultGenres =
-    genres && genres.map(({ name, id }) => <li key={id}>{name}</li>);
+    genres &&
+    genres.map(({ name, id }) => (
+      <li key={id}>
+        <p>{name}</p>
+      </li>
+    ));
+
   return (
     <Section>
       <CustomNavLink to={backLinkLocatuonRef.current}>Go back</CustomNavLink>
@@ -60,18 +67,22 @@ function MovieDetails() {
         <List>
           <li>
             <b>
-              {title} {releaseYear}
+              {title} {releaseYear.length && <span>{releaseYear}</span>}
             </b>
           </li>
           <li>Use score: {resultAverage}</li>
-          <li>
-            <b>Overview</b>
-            <DescriptionOverview>{overview}</DescriptionOverview>
-          </li>
-          <li>
-            <b>Genres</b>
-            <ListGenres>{resultGenres}</ListGenres>
-          </li>
+          {overview && (
+            <li>
+              <b>Overview</b>
+              <DescriptionOverview>{overview}</DescriptionOverview>
+            </li>
+          )}
+          {resultGenres && resultGenres.length > 0 && (
+            <li>
+              <b>Genres</b>
+              <ListGenres>{resultGenres}</ListGenres>
+            </li>
+          )}
         </List>
       </Content>
       <UnderContent>
