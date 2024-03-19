@@ -30,7 +30,7 @@ function Cast() {
   }, [id]);
   return (
     <>
-      {data.length > 0 && (
+      {data.length > 0 ? (
         <ul>
           {data.map(({ name, ids, character, profile_path }) => (
             <Item key={ids}>
@@ -43,6 +43,8 @@ function Cast() {
             </Item>
           ))}
         </ul>
+      ) : (
+        'Unfortunately, there is no information available for this film 😟'
       )}
     </>
   );

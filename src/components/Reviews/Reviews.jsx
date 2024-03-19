@@ -18,13 +18,14 @@ function Reviews() {
   return (
     <>
       <List>
-        {data.length > 0 &&
-          data.map(({ author, content, id }) => (
-            <li key={id}>
-              <Author>{author}</Author>
-              <Content>{content}</Content>
-            </li>
-          ))}
+        {data.length > 0
+          ? data.map(({ author, content, id }) => (
+              <li key={id}>
+                <Author>{author}</Author>
+                <Content>{content}</Content>
+              </li>
+            ))
+          : 'Unfortunately, there is no information available for this film 😲 '}
       </List>
     </>
   );
